@@ -11,10 +11,11 @@ public class Main {
         Runnable logic = () -> {
                 for (int i = 0; i < 10; i++) {
                     System.out.println(Thread.currentThread().getName() + " zashel v avtosalon");
-                    if (cars.isEmpty()) System.out.println("Mashin net");
+                    //if (cars.isEmpty()) System.out.println("Mashin net");
                     synchronized (cars) {
                         if (cars.isEmpty()) {
                             try {
+                                System.out.println("Mashin net");
                                 cars.wait();
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
