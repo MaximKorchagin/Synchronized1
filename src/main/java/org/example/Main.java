@@ -10,11 +10,11 @@ public class Main {
 
         new Thread(() -> {
             for (int i = 0; i < 10; i++) {
+                System.out.println(Thread.currentThread().getName() + " zashel v avtosalon");
+                if (cars.isEmpty()) System.out.println("Mashin net");
                 synchronized (cars) {
-                    System.out.println(Thread.currentThread().getName() + " zashel v avtosalon");
                     if (cars.isEmpty()) {
                         try {
-                            System.out.println("Mashin net");
                             cars.wait();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -22,6 +22,34 @@ public class Main {
                     }
                     cars.remove(0);
                     System.out.println(Thread.currentThread().getName() + " uehal na novenkom avto");
+                }
+                try {
+                    Thread.sleep(8000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
+
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                System.out.println(Thread.currentThread().getName() + " zashel v avtosalon");
+                if (cars.isEmpty()) System.out.println("Mashin net");
+                synchronized (cars) {
+                    if (cars.isEmpty()) {
+                        try {
+                            cars.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    cars.remove(0);
+                    System.out.println(Thread.currentThread().getName() + " uehal na novenkom avto");
+                }
+                try {
+                    Thread.sleep(8000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }).start();
@@ -31,14 +59,13 @@ public class Main {
             for (int i = 0; i < 10; i++) {
                 synchronized (cars) {
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                     System.out.println("Novaya mashina priehala v avtosalon");
                     cars.add("[nomer] " + i);
                     cars.notify();
-                    //
                 }
                 try {
                     Thread.sleep(300);
