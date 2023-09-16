@@ -4,55 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         List<String> cars = new ArrayList<>();
 
-        new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
-                System.out.println(Thread.currentThread().getName() + " zashel v avtosalon");
-                if (cars.isEmpty()) System.out.println("Mashin net");
-                synchronized (cars) {
-                    if (cars.isEmpty()) {
-                        try {
-                            cars.wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+        Runnable logic = () -> {
+                for (int i = 0; i < 10; i++) {
+                    System.out.println(Thread.currentThread().getName() + " zashel v avtosalon");
+                    if (cars.isEmpty()) System.out.println("Mashin net");
+                    synchronized (cars) {
+                        if (cars.isEmpty()) {
+                            try {
+                                cars.wait();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
+                        cars.remove(0);
+                        System.out.println(Thread.currentThread().getName() + " uehal na novenkom avto");
                     }
-                    cars.remove(0);
-                    System.out.println(Thread.currentThread().getName() + " uehal na novenkom avto");
+                    try {
+                        Thread.sleep(8000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-                try {
-                    Thread.sleep(8000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }).start();
+            };
 
-        new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
-                System.out.println(Thread.currentThread().getName() + " zashel v avtosalon");
-                if (cars.isEmpty()) System.out.println("Mashin net");
-                synchronized (cars) {
-                    if (cars.isEmpty()) {
-                        try {
-                            cars.wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    cars.remove(0);
-                    System.out.println(Thread.currentThread().getName() + " uehal na novenkom avto");
-                }
-                try {
-                    Thread.sleep(8000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }).start();
+        new Thread(logic, "Temych").start();
+        new Thread(logic, "Vladik").start();
 
 
         new Thread(() -> {
