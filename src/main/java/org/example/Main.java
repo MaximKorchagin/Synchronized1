@@ -8,14 +8,14 @@ public class Main {
 
         List<String> cars = new ArrayList<>();
 
-        Runnable logic = () -> {
+        Runnable consumer = () -> {
                 for (int i = 0; i < 10; i++) {
                     System.out.println(Thread.currentThread().getName() + " zashel v avtosalon");
-                    //if (cars.isEmpty()) System.out.println("Mashin net");
+                    if (cars.isEmpty()) System.out.println("Mashin net");
                     synchronized (cars) {
                         if (cars.isEmpty()) {
                             try {
-                                System.out.println("Mashin net");
+                                //System.out.println("Mashin net");
                                 cars.wait();
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
@@ -31,12 +31,7 @@ public class Main {
                     }
                 }
             };
-
-        new Thread(logic, "Temych").start();
-        new Thread(logic, "Vladik").start();
-
-
-        new Thread(() -> {
+        Runnable manufacturer = () -> {
             for (int i = 0; i < 10; i++) {
                 synchronized (cars) {
                     try {
@@ -49,12 +44,18 @@ public class Main {
                     cars.notify();
                 }
                 try {
-                    Thread.sleep(300);
+                    Thread.sleep(400);
                 } catch (InterruptedException e) {
                     return;
                 }
             }
-        }).start();
+        };
+
+
+        new Thread(consumer, "Temych").start();
+        new Thread(consumer, "Vladik").start();
+        new Thread(manufacturer).start();
+
 
 
 
