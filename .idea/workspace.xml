@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f09d982-caf8-420d-a1bd-79672742db3c" name="Changes" comment="runnable">
+    <list default="true" id="9f09d982-caf8-420d-a1bd-79672742db3c" name="Changes" comment="fixed">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,7 +69,8 @@
       <updated>1694760622968</updated>
       <workItem from="1694760624563" duration="4954000" />
       <workItem from="1694847399527" duration="7116000" />
-      <workItem from="1694881175549" duration="303000" />
+      <workItem from="1694881175549" duration="673000" />
+      <workItem from="1694930953847" duration="1149000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1694775097538</created>
@@ -91,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694863090685</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fixed">
+      <created>1694881774558</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1694881774558</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,6 +121,7 @@
     <MESSAGE value="init commit" />
     <MESSAGE value="avtosalon rabotaet (krivo)" />
     <MESSAGE value="runnable" />
-    <option name="LAST_COMMIT_MESSAGE" value="runnable" />
+    <MESSAGE value="fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed" />
   </component>
 </project>
